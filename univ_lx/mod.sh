@@ -3,25 +3,36 @@
 Help() {
     # Display Help
   echo "Модификация Головного Устройства (ГУ) на Changan Uni-V."
+  echo 
+  echo "Выполняемые команды"
+  echo "-c      Проверка подключения ГУ по ADB"
+  echo "--root      Получение root прав"
+  echo "--unlock    Удалить приложение защиты от установок"
+  echo "--install   Установить APK из папки system_apk"
+  echo 
+}
+
+CheckADB(){
+    # Check ADB connected devices
+    adb devices
 }
 
 ############################################################
 # Process the input options. Add options as needed.        #
 ############################################################
 # Get the options
-while getopts ":hbdpm:s-:" option; do
+while getopts ":hcm:s-:" option; do
   case $option in
   [Hh]*) # display Help
     Help
     exit
     ;;
-  t)
-    echo 'test'
+  c)
+    CheckADB
     exit
     ;;
 
   m*)
-    # Make migrations
     arg=${OPTARG}
     echo 'with arg ' + $migration_name
     exit
